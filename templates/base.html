@@ -1,0 +1,62 @@
+{% block doctype %}
+<!DOCTYPE html>
+{% endblock %}
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block styles %}
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css')}}">
+  {% endblock %}
+  <title>{% block title %}{{active_title}}{% endblock %}</title>
+</head>
+
+<body onload="setMenuState()">
+  {% block header %}
+  <div class="header dark-bg unified-text">
+    <div class="logo">
+      <img class="logo" src="{{ url_for('static', filename='resources/companylogo.jpg') }}" alt="Fly Robotics USA Corporation Logo"></img>
+    </div>
+    <div class="brand">
+      <h1>Fly Robotics USA Corp: We have your solution.</h4>
+    </div>
+  </div>
+  {% endblock %}
+  <div class="main">
+    {% block navigation %}
+    <div class="menu dark-bg unified-text">
+      <div class="sidebar dark-bg unified-text sidebar--isHidden">
+        <ul class="sidebar-menu unified-text">
+          <button class="sidebar-menu__item reg-bg unified-text" id="toggle" onclick="toggleMenu()">&#9776;</button>
+          {% for x in range(0,menu_size) %}
+          <li class={{ menu_class[x].liclass }}><a href="{{ url_for(menu_class[x].href)}}"><i id="menu-item" class="fa {{ menu_class[x].class }}"
+                aria-hidden="true">{{ menu_class[x].text }}</i></a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% endblock %}
+    <div class="content unified-text reg-bg">
+    {% block content %}
+    {% endblock %}
+  </div>
+</div>
+  <div class="footer">
+    {% block footer %}
+    <h6>Fly Robotics USA Corp &copy; February 2022-present</h6>
+    {% endblock %}
+  </div>
+  <div class="bottomdec">
+    {% block bottomdecorator %}
+    {% endblock %}
+  </div>
+  {% block scripts %}
+  <script src="{{ url_for('static', filename='js/navbar.js') }}"></script>
+  {% endblock %}
+</body>
+
+</html>
